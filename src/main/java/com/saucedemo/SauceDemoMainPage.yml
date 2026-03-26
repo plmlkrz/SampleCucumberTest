@@ -6,8 +6,8 @@ elements:
     class: product_sort_container
 
   first_item_name:
-    elementType: Div
-    xpath: "(//div[@class='inventory_item_name'])[1]"
+    xpath: "(//*[contains(@class,'inventory_item_name')])[1]"
+    css: ".inventory_item_name"
 
   sauce_labs_backpack_link:
     elementType: Div

@@ -12,22 +12,8 @@
     <name>SampleCucumber</name>
     <url>https://github.com/your-org/SampleCucumber</url>
 
-    <!-- Required to resolve Sentinel SNAPSHOT builds -->
-    <repositories>
-        <repository>
-            <id>oss.sonatype.org-snapshot</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <dependencies>
-        <!-- Sentinel test automation framework -->
+        <!-- Sentinel test automation framework (installed locally from https://github.com/plmlkrz/Sentinel) -->
         <dependency>
             <groupId>com.dougnoel</groupId>
             <artifactId>sentinel</artifactId>
@@ -44,6 +30,9 @@
                     <version>3.10.1</version>
                     <configuration>
                         <release>17</release>
+                        <!-- Disable annotation processing: this project has no Lombok annotations,
+                             but Lombok 1.18.24 (transitive from Sentinel) crashes on Java 17+ -->
+                        <proc>none</proc>
                     </configuration>
                 </plugin>
             </plugins>
@@ -58,6 +47,9 @@
                     <includes>
                         <include>**/TestRunner.java</include>
                     </includes>
+                    <!-- Open java.io to allow Sentinel's ConfigurationData (extends File)
+                         to be deserialized by Jackson on Java 17+ -->
+                    <argLine>--add-opens java.base/java.io=ALL-UNNAMED</argLine>
                 </configuration>
             </plugin>
         </plugins>
