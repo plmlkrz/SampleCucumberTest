@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>SampleCucumber</name>
-    <url>https://github.com/your-org/SampleCucumber</url>
+    <url>https://github.com/plmlkrz/SampleCucumberTest</url>
 
     <dependencies>
         <!-- Sentinel test automation framework (installed locally from https://github.com/plmlkrz/Sentinel) -->
@@ -18,6 +18,27 @@
             <groupId>com.dougnoel</groupId>
             <artifactId>sentinel</artifactId>
             <version>1.0.13-SNAPSHOT</version>
+        </dependency>
+
+        <!-- JUnit 5 Cucumber Platform Engine — replaces legacy JUnit 4 @RunWith runner -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>7.8.1</version>
+        </dependency>
+
+        <!-- @Suite annotation + suite discovery engine (aligns with Sentinel's junit-bom 5.9.2) -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+
+        <!-- Allows Surefire to use the JUnit Platform provider (not vintage JUnit 4) -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.9.2</version>
         </dependency>
     </dependencies>
 
@@ -29,7 +50,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.10.1</version>
                     <configuration>
-                        <release>17</release>
+                        <release>21</release>
                         <!-- Disable annotation processing: this project has no Lombok annotations,
                              but Lombok 1.18.24 (transitive from Sentinel) crashes on Java 17+ -->
                         <proc>none</proc>
@@ -44,9 +65,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M8</version>
                 <configuration>
-                    <includes>
-                        <include>**/TestRunner.java</include>
-                    </includes>
                     <!-- Open java.io to allow Sentinel's ConfigurationData (extends File)
                          to be deserialized by Jackson on Java 17+ -->
                     <argLine>--add-opens java.base/java.io=ALL-UNNAMED</argLine>

@@ -1,53 +1,19 @@
 package tests;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
+import org.junit.platform.suite.api.ConfigurationParameter;
+import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
+import org.junit.platform.suite.api.Suite;
 
-import com.dougnoel.sentinel.configurations.Configuration;
-import com.dougnoel.sentinel.system.SentinelScreenRecorder;
-import com.dougnoel.sentinel.webdrivers.Driver;
+import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
+import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-
-@RunWith(Cucumber.class)
-@CucumberOptions(
-    monochrome = true,
-    features = "src/test/java/features",
-    glue = { "com.dougnoel.sentinel.steps", "steps", "hooks" },
-    plugin = {
-        "json:target/cucumber.json",
-        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
-    }
-)
+@Suite
+@IncludeEngines("cucumber")
+@SelectClasspathResource("features")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME,
+    value = "com.dougnoel.sentinel.steps,steps,hooks")
+@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME,
+    value = "json:target/cucumber.json,com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:")
 public class TestRunner {
-
-    private static final Logger log = LogManager.getLogger(TestRunner.class);
-
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-        if (Configuration.toBoolean("recordTests")) {
-            SentinelScreenRecorder.startRecording();
-        }
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-        String totalWaitTime = Configuration.toString("totalWaitTime");
-        if (totalWaitTime != null) {
-            log.warn("This test took {} total seconds longer due to explicit waits. "
-                    + "Sentinel handles dynamic waits automatically.", totalWaitTime);
-        }
-
-        if (Configuration.toBoolean("recordTests")) {
-            SentinelScreenRecorder.stopRecording();
-        }
-
-        if (!Configuration.toBoolean("leaveBrowserOpen")) {
-            Driver.quitAllDrivers();
-        }
-    }
 }
