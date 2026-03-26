@@ -1,0 +1,21 @@
+configurations:
+  default:
+    name: "SampleCucumber"
+    browser: chrome
+    headless: false
+    timeout: 10
+    timeunit: seconds
+    pageObjectPackages: com.saucedemo
+    user.name: "Me"
+    download: "download/Directory"
+    build: "1.0.5"
+    tags: "new_test"
+    os: "Windows 11"
+    browserVersion: "latest"
+    chromeBrowserBinary: "my/path/here/executableName.exe"
+    saucelabsUserName: "username"
+    saucelabsAccessKey: "apikey"
+    parent-tunnel: "tunnelname"
+    tunnelIdentifier: "tunnelID"
+    recordTests: true
+    imageDirectory: "my/path/to/test/images"
