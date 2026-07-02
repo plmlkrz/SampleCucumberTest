@@ -12,7 +12,7 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME,
-    value = "com.dougnoel.sentinel.steps,steps,hooks")
+    value = "io.github.sentinel.steps,steps,hooks")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME,
     value = "json:target/cucumber.json,com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:")
 public class TestRunner {

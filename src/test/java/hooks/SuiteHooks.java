@@ -1,8 +1,8 @@
 package hooks;
 
-import com.dougnoel.sentinel.configurations.Configuration;
-import com.dougnoel.sentinel.system.SentinelScreenRecorder;
-import com.dougnoel.sentinel.webdrivers.Driver;
+import io.github.sentinel.configurations.Configuration;
+import io.github.sentinel.system.SentinelScreenRecorder;
+import io.github.sentinel.webdrivers.Driver;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.BeforeAll;
 import org.apache.logging.log4j.LogManager;

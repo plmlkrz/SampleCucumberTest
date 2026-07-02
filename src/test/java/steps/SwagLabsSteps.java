@@ -1,8 +1,8 @@
 package steps;
 
-import com.dougnoel.sentinel.steps.AccountSteps;
-import com.dougnoel.sentinel.steps.BaseSteps;
-import com.dougnoel.sentinel.steps.WindowAndTabSteps;
+import io.github.sentinel.steps.AccountSteps;
+import io.github.sentinel.steps.BaseSteps;
+import io.github.sentinel.steps.WindowAndTabSteps;
 import io.cucumber.java.en.Given;
 
 public class SwagLabsSteps {
