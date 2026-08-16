@@ -12,26 +12,14 @@
     <name>SampleCucumber</name>
     <url>https://github.com/your-org/SampleCucumber</url>
 
-    <!-- Required to resolve Sentinel SNAPSHOT builds -->
-    <repositories>
-        <repository>
-            <id>oss.sonatype.org-snapshot</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <dependencies>
-        <!-- Sentinel test automation framework -->
+        <!-- Sentinel test automation framework.
+             Resolved from the local repository: build it with `mvn install`
+             from the Sentinel project checkout before running these tests. -->
         <dependency>
-            <groupId>com.dougnoel</groupId>
+            <groupId>io.github.sentinel</groupId>
             <artifactId>sentinel</artifactId>
-            <version>1.0.13-SNAPSHOT</version>
+            <version>1.0.14-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -44,6 +32,10 @@
                     <version>3.10.1</version>
                     <configuration>
                         <release>17</release>
+                        <!-- extentreports pulls in Lombok 1.18.12 at compile scope, which
+                             cannot run as an annotation processor on JDK 16+. This project
+                             has no annotation processors, so skip processor discovery. -->
+                        <proc>none</proc>
                     </configuration>
                 </plugin>
             </plugins>

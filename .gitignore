@@ -1,6 +1,8 @@
 target/
 sentinel.log
 conf/sentinel.yml
+# webdrivermanager's cached driver binaries
+src/test/resources/drivers/
 *.class
 *.iml
 .idea/
