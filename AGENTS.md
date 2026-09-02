@@ -1,4 +1,5 @@
 # AGENTS.md
+# Last audited: 2026-09-02
 
 This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
